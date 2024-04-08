@@ -1,0 +1,18 @@
+import requests
+from lxml import etree
+
+# 输入你想要爬取的网站URL
+url = 'https://example.com'
+
+# 获取网页源代码
+response = requests.get(url).text
+
+# 将源代码转换为可以识别的XPath格式
+selector = etree.HTML(response)
+
+# 提取信息
+info = {}
+info['标题'] = selector.xpath('//title/text()')[0].strip()  # 定位网页标题
+info['正文'] = selector.xpath('//p/text()')  # 定位正文内容，你可以根据实际情况修改XPath表达式
+
+print(info)
